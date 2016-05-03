@@ -1,0 +1,269 @@
+//// Nbrooks PROJECT #1
+
+String title="Project #1 -- Hero chases the gold";
+String author="Narada Brooks";
+String Score= "Score";
+
+
+
+/// GLOBAL COORDINATES ///
+
+float sunX, sunY; //variables for sun
+float sunDX;
+
+float x=100,y=100;        // Position of man
+  
+float horizon;
+
+float xGold=400, yGold=525;
+int score=0;
+
+
+void setup() 
+{
+  
+  size( 1000, 500 );     //// screen size
+  horizon= height/4;
+  frameRate(30);         //// Frame rate slows everything down
+  x=100;
+  y=100;
+  
+  sunX=  width/10;   // Reset the sun position.
+  sunY=  100;
+  sunDX=  4;  
+}
+
+// NEXT FRAME ////
+
+//// background sky and grass colors
+
+void draw() 
+{
+  ///  BACKGROUND SCENE  ///
+  
+  background( 0, 175, 255);             //// background sky color
+  fill(0, 200, 0);                     //green grass rectangle color
+  ////rect(0, 600, 2000, 600);            //rectangle grass
+  rectMode( CORNER );
+  rect( 0,horizon, width,height-horizon);
+  
+  sun();
+  
+  
+  house();
+  man();
+  move();
+  action();
+  gold();
+ 
+ //// SCREEN TEXT MESSAGES ////
+ 
+  fill( 255, 0, 0 );                     ////  text color 
+  textSize(26);
+  text( "waah gwaan", x+50, y-50 );
+  
+  
+  fill( 250, 0,0 );                                   //// red text color tittle
+ 
+  textSize(20);                                     //// tittle text size tittle
+  
+  text ("Project#1: Sunny Day", 0, width/40);       //// title Sunny Day 
+  
+  fill( 100, 0, 200 );                                  //// purple text color author's name
+  
+  textSize(22);                                     //// text size fr author's name
+  
+  text("Narada, 61CST112 broon84", 0, width/20);  //// Author's name and class
+  
+  text("Score =" +score,  680, width/30);               /// score title location
+}
+
+
+void sun()
+
+{
+  
+  /// YELLOW SUN AND COLOR ///
+  
+  fill( 255, 255, 0 );                     //// yellow sun color
+  ellipse (sunX,sunY,75,80);    //// yellow ellipse sun
+  ////ellipse (x-100,y=65,75,80);     ////makes sun and man moves together
+}
+
+
+//// MOVE THE SUN  (by changing x,y)  ///
+
+void move()
+
+{
+  if (sunX>width) {
+    sunX=  50;
+    sunY=  random( 20, height/4 );
+  }
+  sunX=  sunX + sunDX;
+}
+
+
+
+void house()
+{
+  
+ //// FULL HOUSE AND COLOR  ///
+ 
+  rectMode(CENTER);
+  fill( 255, 0, 0 );       //// red house color 
+  rect( 200, 225, 175, 150 );  //// rectangular red house body
+  
+  fill( 0, 0, 200 );    ////  house door color
+  rect( 200, 250, 50, 100 );     //  house rectangular door
+  
+  
+  
+  fill( 255, 0, 0 );         //// red roof color
+  triangle( 100, 150, 200, 50, 300, 150 );   //// red house roof
+  
+  
+  fill( 255, 255, 255 );    //// white window 1 color  
+  rectMode(CORNER);
+  
+  rect( 120, 160, 40, 40 );    //// window 1 left
+  
+  rect( 240, 160, 40, 40);    //// window 2  right
+  
+  
+  //// BROWN AND GREEN TREE ////
+  
+  rectMode(CORNERS);
+  fill( 204,102 ,0 );       ////bown tree bark color
+  rect( 560, 190, 600, 300 );    //// tree body
+  
+  fill( 0, 250, 0 );            //// green leaf tree  color
+  ellipse( 580, 110, 150, 200 );    //// tree top gree leaves
+  
+  fill( 204, 102 ,0 );           //// small brown color 1
+  rect( 640, 200, 620, 300 );    /// small Tree brown 1
+  
+  fill( 130, 180, 0 );             //// small tree green leaf color 1
+  ellipse( 630, 190, 50, 110 );    /// small tree 1
+  
+  fill( 204, 102 ,0 );           //// small brown color 2
+  rect( 700, 200, 680, 300 );    /// small Tree brown 2
+  
+  fill( 130, 200, 0 );             //// small tree green leaf color 2
+  ellipse( 690, 190, 50, 110 );    /// small tree 2
+  
+  
+}
+
+
+void man()
+{
+  /// DRAW MAN ///
+  
+  fill( 0, 0, 100 );
+  rectMode(CENTER);
+  
+  // MAN BODY & HEAD
+  
+  fill(0,0,0);
+  rect( x,y, 40, 100 );            // man body
+  
+  
+  fill( 240,222,17 );   ////yellow name and head
+  textSize(16);         /// size of man name
+  text("Blinky", x-20, y+20 );     // Blinky man name 
+  
+  ellipse( x, y-30, 60, 60 );      // man head
+  
+  // MAN EYES
+  
+  fill( 147, 13, 13 );
+  ellipse( x-19, y-30, 16, 32 );     // man left eye
+ 
+  //--  ellipse(119, 70, 16, 32);   //// ORIGINAL MEASUREMENTS 
+  ellipse( x+19, y-30, 16, 32 );     // man right eye
+  
+  // MAN LEGS
+  
+  //// fill( 250, 0, 0 );             /// ?? color of man
+  stroke( 250, 0, 0 );           /// ?? color of man 
+  strokeWeight( 12 );
+  line( x-10, y+50, x-20, y+90 );   // man left foot
+  line( x+10, y+50, x+20, y+90 );   // man right foot
+  stroke(  0 );  
+  strokeWeight( 1 );
+}
+
+
+//// MOVE MAN  (by changing x,y)  ////
+
+void action()
+{
+  if (x>width) {
+    x=100;
+    y=100;
+  }
+  x=  x + (xGold-x) / 30;
+  y=  y + (yGold-y) / 30;
+  
+  // Check if man found gold.
+  if (  dist( x,y, xGold,yGold ) < 30 )  
+  {
+    score=score + 100;
+    restart();
+  }
+  else{
+    score=score - 1 ;  
+  }
+  
+}
+void restart() {
+  x=  50;
+  y=  random( horizon, height );
+  
+  x=  200;
+  y=  horizon;
+  
+{
+  xGold=random(0, width);          //// restart gold randomly
+  yGold=random(horizon, height);    //// restart gold randomly 
+  
+}
+  
+}
+
+void mousePressed()
+{
+  xGold=  mouseX;
+  yGold=  mouseY;
+  restart();
+}
+
+//// GOLD FUNCTION //
+void gold()
+{
+  if( dist( x, y, xGold, yGold) < 30 ) {
+    score = score + 100;
+    xGold = random( width/2, width );
+    yGold = random( horizon, height );
+    x= random(0, width/2 );
+    y= random( horizon, height );
+  }   
+  
+  
+  noStroke();
+  //// DRAW GOLD ////
+  fill( random(200,255), 150, random(150) );
+  //--  ellipse(400,525,320,380);    //// dimension for gold  
+  ellipse( xGold, yGold, random( 50, 60), 40 );
+
+  fill( random(150,255), 150, random(150) );
+  //--  ellipse(400,525,320,380);    //// dimension for gold  
+  ellipse( xGold, yGold, random( 40, 50), 30 );
+
+  fill( random(200,255), 50, random(150) );
+  //--  ellipse(400,525,320,380);    //// dimension for gold  
+  ellipse( xGold, yGold, random( 30, 40), 20 );
+  
+  stroke(0);
+}
