@@ -1,0 +1,157 @@
+/// Narada Brooks CST 112 Take Home MIDTERM  ////
+
+
+String title= "Tank Catch Moby";
+String author= "Narada Brooks";
+
+
+
+
+
+
+//++++  GLOBAL  DECLARATIONS  ++++//
+ 
+ float tankX; 
+ float tankY = 100;
+ float tankDX=3;
+ 
+ float x=100,y=100;
+ 
+ float horizon;
+ 
+ float mobyX= 200;
+ float mobyY = 100;
+ float mobyDX= 5;
+ 
+
+//  SETUP   //
+void setup() {
+  size( 600, 400 );  
+  tankX=  170;
+  float surface= height/4;
+
+}
+
+/// NEXT FRAME ///
+// BACKGROUND //
+
+void draw() {
+ 
+  //scene();         //Sky and Water//
+  //action();       // Move tank and moby.
+  //show();         // Display tank, moby, shrimp.
+  //messages();     // Title, Author, Scores. 
+  
+  background ( 200, 220, 250 );  
+  fill( 50, 150, 50 );
+  rect(0,height/4,width,height*3/4);
+  
+  textSize(18);
+  fill(0,158,0);
+  text(" Tank Catch Moby", 200, width/40 );
+  text("Narada Brooks", 10, height/20 );
+ 
+ tank();
+ moby();
+ shrimp();
+ move();
+ action();
+ movemoby();
+}  
+  
+  // move tank ///
+  
+void move()  ////move tank
+{
+  if ( tankX>width) {
+    tankDX=  -tankDX;
+  }
+  if ( tankX<0) {
+    tankX= 50;
+    //tankY= height/4; //height/4( 20, height/4 ); 
+  }
+  tankX= tankX + tankDX;
+
+
+  
+}
+
+/// Draw tank ///
+void tank()
+{
+  float surface= height/4;
+
+  //orange tank//
+  fill( 211, 85, 6 );   // orange tank color
+  rect( tankX+70, surface-60, 10, 60 );   // tank mass 
+  rect( tankX, surface-40, 100, 40);  // tank body
+  triangle( tankX, surface, tankX, surface-40, tankX-30, surface-40 );  // tank stern
+  ///triangle(24,150,100,200,110,150);
+  
+}
+
+
+  /// Move moby //
+  
+void movemoby(){   //// move moby randomly
+
+
+  if ( mobyX>width) {
+    mobyDX=  -mobyDX;
+  }
+  if ( mobyX<0) {
+    mobyX= 50;
+     
+  }
+  mobyX = mobyX + mobyDX;
+  
+}
+
+
+
+// Draw moby ///
+
+void moby()
+{
+ 
+  
+  
+  fill( 6, 124, 211 );            //moby color
+  noStroke();                     // blends the moby
+  ellipse( mobyX+20, 200, mobyX, 40 );     // moby body 
+  triangle( mobyX, 180, mobyX+60, 180 , mobyX+60, 140 );   // moby fin 1
+  triangle( mobyX, 220, mobyX+60, 220 , mobyX+60, 260 );   // moby fin 2
+  
+  triangle( mobyX+80, 200, mobyX+120, 230, mobyX+120, 160 );    // moby tail 
+  
+  fill(211,202,6);           //moby eye color
+  ellipse( mobyX-60,200,mobyX-190,10 );   // moby eye
+  stroke(0);                  /// returns regular stroke
+  
+  
+}
+
+// Draw shrimp //
+
+void shrimp()
+{
+ 
+ fill( 0, 6, 2 );   // shrimp body color
+ ellipse( 280, 300, 200, 40 ); /// shrimp body
+ fill(211,202,6 );             // shrimp fin color
+  rect( 220,260,20,80);      // shrimp fin
+  
+}
+
+void action()   // move tank
+ { 
+  if (x>width) {
+    x=100;
+   // y=100;
+  }
+  x=  x + (tankX-x) / 30;
+ // y=  y + (tankY-y) / 30;
+  
+ }
+  
+  
